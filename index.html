@@ -1,87 +1,96 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f8edf0">
-<title>michibiki｜あなたの人生をやさしく導く占い</title>
+<meta name="theme-color" content="#b9dcf7">
+<title>michibiki｜あなたの心に、やさしい道しるべを</title>
 <style>
-:root{--pink:#d99eae;--deep:#765967;--cream:#fffaf4;--pale:#f8edf0;--ink:#594b50;--line:#eadde0}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.7}
-header{padding:28px 20px 24px;text-align:center;background:linear-gradient(145deg,#f8edf0,#fff7ed);border-bottom:1px solid var(--line)}
-.brand{font-family:Georgia,serif;font-size:34px;letter-spacing:3px;color:var(--deep);margin:0}.sub{font-size:11px;letter-spacing:2px;color:#9d7c88;margin:2px 0 16px}
-header h1{font-size:19px;font-weight:500;margin:0 0 5px}header p{font-size:12px;margin:0;color:#8d777f}
-main{max-width:760px;margin:auto;padding:22px 16px 48px}
-.section-title{font-size:16px;font-weight:600;margin:24px 2px 12px;color:var(--deep)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.menu{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px;min-height:112px;box-shadow:0 3px 12px #8a64700b}
-.menu .emoji{font-size:22px}.menu strong{display:block;font-size:14px;margin:5px 0 2px}.menu small{display:block;font-size:11px;color:#967f87}
-.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:18px;box-shadow:0 5px 18px #8a64700c}
-.panel h2{font-size:16px;margin:0 0 4px;color:var(--deep)}.hint{font-size:12px;color:#917e84;margin:0 0 14px}
-label{display:block;font-size:12px;margin:12px 0 5px;color:#765f69}
-input{width:100%;padding:13px;border:1px solid #e5d6dc;border-radius:10px;background:#fffdfb;color:var(--ink);font-size:16px}
-button{border:0;border-radius:999px;background:var(--deep);color:white;padding:13px 20px;font-size:14px;width:100%;margin-top:16px}
-button.secondary{background:#f4e8ec;color:var(--deep);border:1px solid var(--line)}
-.result{display:none;margin-top:14px;padding:14px;border-radius:12px;background:#fff7f3;border:1px solid var(--line);font-size:13px}
-.note{font-size:11px;color:#9a858c;margin-top:18px;text-align:center}
-footer{text-align:center;padding:22px;color:#a28b92;font-size:11px;border-top:1px solid var(--line)}
-@media(min-width:600px){header{padding:42px 20px 34px}.grid{grid-template-columns:repeat(3,1fr)}main{padding-top:30px}.panel{padding:24px}}
+:root{--rose:#ffffff;--rose2:#ffffff;--ink:#ffffff;--cream:#fffdfc;--line:rgba(255,255,255,.55)}
+*{box-sizing:border-box}
+body{margin:0;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:linear-gradient(180deg,#a9d4f5 0%,#d8ebfa 38%,#f5f9fc 100%);min-height:100vh}
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(ellipse at 15% 16%,rgba(255,255,255,.88) 0 5%,transparent 21%),radial-gradient(ellipse at 80% 28%,rgba(255,255,255,.78) 0 7%,transparent 23%),radial-gradient(ellipse at 42% 62%,rgba(255,255,255,.65) 0 6%,transparent 25%),linear-gradient(145deg,#9ecdf1,#d8edfc 65%,#b5daf7)}
+.sky:before,.sky:after{content:"";position:absolute;width:75vw;height:18vh;border-radius:50%;background:rgba(255,255,255,.48);filter:blur(30px)}
+.sky:before{top:14%;left:-20%}.sky:after{top:48%;right:-25%}
+header{max-width:900px;margin:auto;padding:38px 22px 22px;display:flex;justify-content:space-between;align-items:flex-start}
+.brand{font-family:Georgia,serif;font-style:italic;font-size:clamp(38px,9vw,58px);letter-spacing:1px;color:#fff;text-shadow:0 2px 8px rgba(45,91,130,.35);line-height:1}
+.brand small{display:block;text-align:center;font:14px sans-serif;letter-spacing:7px;margin-top:10px}
+.tagline{font-size:13px;letter-spacing:2px;margin:12px 0 0;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45)}
+.menu{font-size:27px;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45);border:0;background:none}
+main{max-width:900px;margin:18px auto 60px;padding:0 18px}
+.intro{text-align:center;margin:24px 0 28px}
+.intro h1{font-size:clamp(23px,5vw,32px);font-weight:600;letter-spacing:2px;margin:0 0 10px;color:#fff;text-shadow:0 2px 8px rgba(45,91,130,.4)}
+.intro p{font-size:14px;line-height:1.9;margin:0;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:rgba(68,125,169,.58);border:1px solid rgba(255,255,255,.62);border-radius:25px;padding:23px 20px;box-shadow:0 12px 35px rgba(111,145,174,.10);display:flex;flex-direction:column;min-height:210px}
+.num{font-family:Georgia,serif;color:#fff;font-size:13px;letter-spacing:2px}
+.card h2{font-size:19px;line-height:1.55;margin:8px 0;color:#fff;text-shadow:0 1px 5px rgba(30,70,105,.35)}
+.card p{font-size:13px;line-height:1.8;margin:0 0 18px;color:#fff;flex:1}
+.card button,.submit{border:1px solid rgba(255,255,255,.95);border-radius:30px;background:rgba(255,255,255,.94);color:#78a9cf;padding:13px 18px;font-size:15px;letter-spacing:1px;box-shadow:0 6px 15px rgba(80,130,170,.12)}
+.note{text-align:center;font-size:12px;line-height:1.8;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45);margin:24px 8px}
+.panel{display:none;background:rgba(68,125,169,.68);border:1px solid var(--line);border-radius:24px;padding:24px 20px;margin-top:24px;box-shadow:0 12px 35px rgba(111,145,174,.10)}
+.panel.active{display:block}
+.panel h2{margin:0 0 8px;color:#fff;font-size:22px}
+.panel p{font-size:13px;line-height:1.8;color:#fff}
+label{display:block;font-size:14px;margin:18px 0 7px;color:#fff}
+input{width:100%;padding:14px;border:1px solid #ead4dc;border-radius:13px;background:#fffdfd;color:#765763;font-size:16px}
+.submit{width:100%;margin-top:22px}
+.result{display:none;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.45);border-radius:15px;padding:16px;margin-top:18px;line-height:1.9;font-size:14px}
+.back{border:0;background:none;color:#fff;padding:12px 0;font-size:14px}
+footer{text-align:center;padding:20px;color:#fff;font-size:12px;text-shadow:0 1px 6px rgba(45,91,130,.45)}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.card{min-height:180px}header{padding-top:28px}.intro{margin-top:15px}}
 </style>
 </head>
 <body>
+<div class="sky"></div>
 <header>
-  <p class="brand">michibiki</p>
-  <p class="sub">〜 みちびき 〜</p>
-  <h1>あなたらしい未来への道しるべ</h1>
-  <p>自分を知って、自分の選択で歩いていくために。</p>
+  <div>
+    <div class="brand">michibiki ♡<small>み ち び き</small></div>
+    <p class="tagline">あなたの心に、やさしい道しるべを</p>
+  </div>
+  <button class="menu" aria-label="メニュー">☰</button>
 </header>
 <main>
-  <div class="section-title">占いメニュー</div>
-  <div class="grid">
-    <a class="menu" href="#love"><span class="emoji">♡</span><strong>恋愛タイプ診断</strong><small>あなたの恋愛傾向をチェック</small></a>
-    <a class="menu" href="#compat"><span class="emoji">♡ ♡</span><strong>恋愛相性占い</strong><small>2人の個性と相性を読み解く</small></a>
-    <a class="menu" href="#marriage"><span class="emoji">✧</span><strong>結婚時期の鑑定</strong><small>人生の節目や流れを確認</small></a>
-    <a class="menu" href="#total"><span class="emoji">☼</span><strong>総合性格診断</strong><small>性格・才能・仕事・恋愛</small></a>
-    <a class="menu" href="#fortune"><span class="emoji">☾</span><strong>2026〜2028年の運気</strong><small>3年間の流れをグラフで表示</small></a>
-    <a class="menu" href="#report"><span class="emoji">✉</span><strong>鑑定レポート</strong><small>結果を文章にして印刷</small></a>
-  </div>
-
-  <section class="panel" id="love">
-    <h2>無料・恋愛タイプ診断</h2>
-    <p class="hint">まずは生年月日を入力してね。</p>
-    <label for="birth">あなたの生年月日</label>
-    <input id="birth" type="date">
-    <button onclick="showDemo('loveResult')">診断する</button>
-    <div class="result" id="loveResult">入力を受け付けました。この画面はサイトの試作版です。正式版では、検証済みの計算ルールを組み込み、あなたの恋愛傾向を表示します。</div>
+  <section class="intro">
+    <h1>あなたを知る、6つの鑑定</h1>
+    <p>自分のこと、あの人のこと、これからの人生。<br>あなたらしい一歩を見つけるお手伝いをします。</p>
   </section>
-
-  <section class="panel" id="compat">
-    <h2>2人の恋愛相性占い</h2>
-    <p class="hint">お互いの生年月日から、2人の個性や関係性を読み解くメニュー。</p>
-    <label for="birthA">あなたの生年月日</label><input id="birthA" type="date">
-    <label for="birthB">お相手の生年月日</label><input id="birthB" type="date">
-    <button onclick="showDemo('compatResult')">相性をみる</button>
-    <div class="result" id="compatResult">入力を受け付けました。正式版では、基本性格・惹かれ合う理由・価値観の違い・恋愛や結婚の相性・アドバイスをまとめます。</div>
+  <section class="grid" id="menus">
+    <article class="card"><span class="num">01 / LOVE</span><h2>恋愛タイプ診断</h2><p>恋をしたときのあなたの特徴や、惹かれやすい相手を読み解きます。</p><button onclick="openPanel(1)">鑑定する　›</button></article>
+    <article class="card"><span class="num">02 / MATCH</span><h2>ふたりの相性診断</h2><p>ふたりの個性や惹かれ合う理由、心地よい関係を築くヒントをお伝えします。</p><button onclick="openPanel(2)">相性をみる　›</button></article>
+    <article class="card"><span class="num">03 / MARRIAGE</span><h2>結婚時期・結婚後のあなた</h2><p>結婚に向かうタイミングや、結婚後に表れやすいあなたの姿を読み解きます。</p><button onclick="openPanel(3)">鑑定する　›</button></article>
+    <article class="card"><span class="num">04 / PERSONALITY</span><h2>あなたの基本性格</h2><p>生まれ持った個性、才能、仕事、恋愛、人との関わり方を総合的に見つめます。</p><button onclick="openPanel(4)">自分を知る　›</button></article>
+    <article class="card"><span class="num">05 / THREE YEARS</span><h2>2026〜2028年の運気</h2><p>3年間の流れをグラフと年ごとのテーマで確認できます。</p><button onclick="openPanel(5)">運気をみる　›</button></article>
+    <article class="card"><span class="num">06 / LIFE READING</span><h2>2026〜2028年の人生鑑定</h2><p>これからの3年間をどう過ごすか、人生のテーマと具体的なヒントをお届けします。</p><button onclick="openPanel(6)">人生を読み解く　›</button></article>
   </section>
-
-  <section class="panel" id="total">
-    <h2>総合性格診断・運気レポート</h2>
-    <p class="hint">性格・才能・仕事・恋愛と、2026〜2028年の運気をまとめるメニュー。</p>
-    <label for="birthTotal">生年月日</label><input id="birthTotal" type="date">
-    <button onclick="showDemo('totalResult')">総合鑑定をはじめる</button>
-    <div class="result" id="totalResult">入力を受け付けました。正式版では、性格・得意分野・仕事の方向性・恋愛傾向・3年間の運気を文章とグラフで表示します。</div>
+  <p class="note">鑑定は、ご自身の選択や行動を応援するためのヒントとしてご活用ください。</p>
+  <section class="panel" id="panel">
+    <button class="back" onclick="closePanel()">← メニューに戻る</button>
+    <h2 id="panelTitle">鑑定</h2>
+    <p id="panelDesc">生年月日を入力してください。</p>
+    <div id="fields"></div>
+    <button class="submit" onclick="showNotice()">入力内容を確認する　›</button>
+    <div class="result" id="result">入力を受け付けました。現在はサイトのデザインと入力画面を準備している段階です。実際の鑑定結果を表示する計算機能は、次の制作段階で追加します。</div>
   </section>
-
-  <section class="panel" id="report">
-    <h2>鑑定レポートについて</h2>
-    <p class="hint">正式版では、鑑定結果をA4サイズに整えて印刷・PDF保存できるようにします。Naoさん用の管理画面では、文章の確認や編集もできる設計にします。</p>
-    <button class="secondary" onclick="window.print()">この試作画面を印刷</button>
-  </section>
-  <p class="note">※現在は画面構成を確認するための試作版です。占いの計算結果や結婚時期・運気の判定は、まだ実装していません。</p>
 </main>
-<footer>michibiki 〜 みちびき 〜</footer>
+<footer>© michibiki</footer>
 <script>
-function showDemo(id){const el=document.getElementById(id);el.style.display='block';el.scrollIntoView({behavior:'smooth',block:'nearest'});}
+const titles={1:"恋愛タイプ診断",2:"ふたりの相性診断",3:"結婚時期・結婚後のあなた",4:"あなたの基本性格",5:"2026〜2028年の運気",6:"2026〜2028年の人生鑑定"};
+const desc={1:"あなたの恋愛傾向を読み解きます。",2:"おふたりの生年月日を入力してください。",3:"結婚に向かうタイミングと結婚後のあなたを読み解きます。",4:"あなたの個性や才能を総合的に読み解きます。",5:"2026年・2027年・2028年の運気を見ていきます。",6:"これから3年間の人生のテーマを読み解きます。"};
+function openPanel(n){
+ document.getElementById("panelTitle").textContent=titles[n];
+ document.getElementById("panelDesc").textContent=desc[n];
+ const fields=document.getElementById("fields");
+ fields.innerHTML='<label>お名前（任意）</label><input type="text" placeholder="お名前">';
+ fields.innerHTML+='<label>生年月日</label><input type="date">';
+ if(n===2) fields.innerHTML+='<label>お相手のお名前（任意）</label><input type="text" placeholder="お相手のお名前"><label>お相手の生年月日</label><input type="date">';
+ document.getElementById("result").style.display="none";
+ document.getElementById("panel").classList.add("active");
+ document.getElementById("panel").scrollIntoView({behavior:"smooth"});
+}
+function closePanel(){document.getElementById("panel").classList.remove("active");document.getElementById("menus").scrollIntoView({behavior:"smooth"});}
+function showNotice(){document.getElementById("result").style.display="block";}
 </script>
 </body>
 </html>
