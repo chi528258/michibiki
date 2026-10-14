@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8edf0">
+<title>michibiki｜あなたの人生をやさしく導く占い</title>
+<style>
+:root{--pink:#d99eae;--deep:#765967;--cream:#fffaf4;--pale:#f8edf0;--ink:#594b50;--line:#eadde0}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.7}
+header{padding:28px 20px 24px;text-align:center;background:linear-gradient(145deg,#f8edf0,#fff7ed);border-bottom:1px solid var(--line)}
+.brand{font-family:Georgia,serif;font-size:34px;letter-spacing:3px;color:var(--deep);margin:0}.sub{font-size:11px;letter-spacing:2px;color:#9d7c88;margin:2px 0 16px}
+header h1{font-size:19px;font-weight:500;margin:0 0 5px}header p{font-size:12px;margin:0;color:#8d777f}
+main{max-width:760px;margin:auto;padding:22px 16px 48px}
+.section-title{font-size:16px;font-weight:600;margin:24px 2px 12px;color:var(--deep)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.menu{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px;min-height:112px;box-shadow:0 3px 12px #8a64700b}
+.menu .emoji{font-size:22px}.menu strong{display:block;font-size:14px;margin:5px 0 2px}.menu small{display:block;font-size:11px;color:#967f87}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:18px;box-shadow:0 5px 18px #8a64700c}
+.panel h2{font-size:16px;margin:0 0 4px;color:var(--deep)}.hint{font-size:12px;color:#917e84;margin:0 0 14px}
+label{display:block;font-size:12px;margin:12px 0 5px;color:#765f69}
+input{width:100%;padding:13px;border:1px solid #e5d6dc;border-radius:10px;background:#fffdfb;color:var(--ink);font-size:16px}
+button{border:0;border-radius:999px;background:var(--deep);color:white;padding:13px 20px;font-size:14px;width:100%;margin-top:16px}
+button.secondary{background:#f4e8ec;color:var(--deep);border:1px solid var(--line)}
+.result{display:none;margin-top:14px;padding:14px;border-radius:12px;background:#fff7f3;border:1px solid var(--line);font-size:13px}
+.note{font-size:11px;color:#9a858c;margin-top:18px;text-align:center}
+footer{text-align:center;padding:22px;color:#a28b92;font-size:11px;border-top:1px solid var(--line)}
+@media(min-width:600px){header{padding:42px 20px 34px}.grid{grid-template-columns:repeat(3,1fr)}main{padding-top:30px}.panel{padding:24px}}
+</style>
+</head>
+<body>
+<header>
+  <p class="brand">michibiki</p>
+  <p class="sub">〜 みちびき 〜</p>
+  <h1>あなたらしい未来への道しるべ</h1>
+  <p>自分を知って、自分の選択で歩いていくために。</p>
+</header>
+<main>
+  <div class="section-title">占いメニュー</div>
+  <div class="grid">
+    <a class="menu" href="#love"><span class="emoji">♡</span><strong>恋愛タイプ診断</strong><small>あなたの恋愛傾向をチェック</small></a>
+    <a class="menu" href="#compat"><span class="emoji">♡ ♡</span><strong>恋愛相性占い</strong><small>2人の個性と相性を読み解く</small></a>
+    <a class="menu" href="#marriage"><span class="emoji">✧</span><strong>結婚時期の鑑定</strong><small>人生の節目や流れを確認</small></a>
+    <a class="menu" href="#total"><span class="emoji">☼</span><strong>総合性格診断</strong><small>性格・才能・仕事・恋愛</small></a>
+    <a class="menu" href="#fortune"><span class="emoji">☾</span><strong>2026〜2028年の運気</strong><small>3年間の流れをグラフで表示</small></a>
+    <a class="menu" href="#report"><span class="emoji">✉</span><strong>鑑定レポート</strong><small>結果を文章にして印刷</small></a>
+  </div>
+
+  <section class="panel" id="love">
+    <h2>無料・恋愛タイプ診断</h2>
+    <p class="hint">まずは生年月日を入力してね。</p>
+    <label for="birth">あなたの生年月日</label>
+    <input id="birth" type="date">
+    <button onclick="showDemo('loveResult')">診断する</button>
+    <div class="result" id="loveResult">入力を受け付けました。この画面はサイトの試作版です。正式版では、検証済みの計算ルールを組み込み、あなたの恋愛傾向を表示します。</div>
+  </section>
+
+  <section class="panel" id="compat">
+    <h2>2人の恋愛相性占い</h2>
+    <p class="hint">お互いの生年月日から、2人の個性や関係性を読み解くメニュー。</p>
+    <label for="birthA">あなたの生年月日</label><input id="birthA" type="date">
+    <label for="birthB">お相手の生年月日</label><input id="birthB" type="date">
+    <button onclick="showDemo('compatResult')">相性をみる</button>
+    <div class="result" id="compatResult">入力を受け付けました。正式版では、基本性格・惹かれ合う理由・価値観の違い・恋愛や結婚の相性・アドバイスをまとめます。</div>
+  </section>
+
+  <section class="panel" id="total">
+    <h2>総合性格診断・運気レポート</h2>
+    <p class="hint">性格・才能・仕事・恋愛と、2026〜2028年の運気をまとめるメニュー。</p>
+    <label for="birthTotal">生年月日</label><input id="birthTotal" type="date">
+    <button onclick="showDemo('totalResult')">総合鑑定をはじめる</button>
+    <div class="result" id="totalResult">入力を受け付けました。正式版では、性格・得意分野・仕事の方向性・恋愛傾向・3年間の運気を文章とグラフで表示します。</div>
+  </section>
+
+  <section class="panel" id="report">
+    <h2>鑑定レポートについて</h2>
+    <p class="hint">正式版では、鑑定結果をA4サイズに整えて印刷・PDF保存できるようにします。Naoさん用の管理画面では、文章の確認や編集もできる設計にします。</p>
+    <button class="secondary" onclick="window.print()">この試作画面を印刷</button>
+  </section>
+  <p class="note">※現在は画面構成を確認するための試作版です。占いの計算結果や結婚時期・運気の判定は、まだ実装していません。</p>
+</main>
+<footer>michibiki 〜 みちびき 〜</footer>
+<script>
+function showDemo(id){const el=document.getElementById(id);el.style.display='block';el.scrollIntoView({behavior:'smooth',block:'nearest'});}
+</script>
+</body>
+</html>
