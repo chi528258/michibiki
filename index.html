@@ -1,96 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#b9dcf7">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#b8d9f2">
 <title>michibiki｜あなたの心に、やさしい道しるべを</title>
 <style>
-:root{--rose:#ffffff;--rose2:#ffffff;--ink:#ffffff;--cream:#fffdfc;--line:rgba(255,255,255,.55)}
-*{box-sizing:border-box}
-body{margin:0;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:linear-gradient(180deg,#a9d4f5 0%,#d8ebfa 38%,#f5f9fc 100%);min-height:100vh}
-.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(ellipse at 15% 16%,rgba(255,255,255,.88) 0 5%,transparent 21%),radial-gradient(ellipse at 80% 28%,rgba(255,255,255,.78) 0 7%,transparent 23%),radial-gradient(ellipse at 42% 62%,rgba(255,255,255,.65) 0 6%,transparent 25%),linear-gradient(145deg,#9ecdf1,#d8edfc 65%,#b5daf7)}
-.sky:before,.sky:after{content:"";position:absolute;width:75vw;height:18vh;border-radius:50%;background:rgba(255,255,255,.48);filter:blur(30px)}
-.sky:before{top:14%;left:-20%}.sky:after{top:48%;right:-25%}
-header{max-width:900px;margin:auto;padding:38px 22px 22px;display:flex;justify-content:space-between;align-items:flex-start}
-.brand{font-family:Georgia,serif;font-style:italic;font-size:clamp(38px,9vw,58px);letter-spacing:1px;color:#fff;text-shadow:0 2px 8px rgba(45,91,130,.35);line-height:1}
-.brand small{display:block;text-align:center;font:14px sans-serif;letter-spacing:7px;margin-top:10px}
-.tagline{font-size:13px;letter-spacing:2px;margin:12px 0 0;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45)}
-.menu{font-size:27px;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45);border:0;background:none}
-main{max-width:900px;margin:18px auto 60px;padding:0 18px}
-.intro{text-align:center;margin:24px 0 28px}
-.intro h1{font-size:clamp(23px,5vw,32px);font-weight:600;letter-spacing:2px;margin:0 0 10px;color:#fff;text-shadow:0 2px 8px rgba(45,91,130,.4)}
-.intro p{font-size:14px;line-height:1.9;margin:0;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card{background:rgba(68,125,169,.58);border:1px solid rgba(255,255,255,.62);border-radius:25px;padding:23px 20px;box-shadow:0 12px 35px rgba(111,145,174,.10);display:flex;flex-direction:column;min-height:210px}
-.num{font-family:Georgia,serif;color:#fff;font-size:13px;letter-spacing:2px}
-.card h2{font-size:19px;line-height:1.55;margin:8px 0;color:#fff;text-shadow:0 1px 5px rgba(30,70,105,.35)}
-.card p{font-size:13px;line-height:1.8;margin:0 0 18px;color:#fff;flex:1}
-.card button,.submit{border:1px solid rgba(255,255,255,.95);border-radius:30px;background:rgba(255,255,255,.94);color:#78a9cf;padding:13px 18px;font-size:15px;letter-spacing:1px;box-shadow:0 6px 15px rgba(80,130,170,.12)}
-.note{text-align:center;font-size:12px;line-height:1.8;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.45);margin:24px 8px}
-.panel{display:none;background:rgba(68,125,169,.68);border:1px solid var(--line);border-radius:24px;padding:24px 20px;margin-top:24px;box-shadow:0 12px 35px rgba(111,145,174,.10)}
-.panel.active{display:block}
-.panel h2{margin:0 0 8px;color:#fff;font-size:22px}
-.panel p{font-size:13px;line-height:1.8;color:#fff}
-label{display:block;font-size:14px;margin:18px 0 7px;color:#fff}
-input{width:100%;padding:14px;border:1px solid #ead4dc;border-radius:13px;background:#fffdfd;color:#765763;font-size:16px}
-.submit{width:100%;margin-top:22px}
-.result{display:none;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.45);border-radius:15px;padding:16px;margin-top:18px;line-height:1.9;font-size:14px}
-.back{border:0;background:none;color:#fff;padding:12px 0;font-size:14px}
-footer{text-align:center;padding:20px;color:#fff;font-size:12px;text-shadow:0 1px 6px rgba(45,91,130,.45)}
-@media(max-width:620px){.grid{grid-template-columns:1fr}.card{min-height:180px}header{padding-top:28px}.intro{margin-top:15px}}
-</style>
-</head>
-<body>
-<div class="sky"></div>
-<header>
-  <div>
-    <div class="brand">michibiki ♡<small>み ち び き</small></div>
-    <p class="tagline">あなたの心に、やさしい道しるべを</p>
-  </div>
-  <button class="menu" aria-label="メニュー">☰</button>
-</header>
-<main>
-  <section class="intro">
-    <h1>あなたを知る、6つの鑑定</h1>
-    <p>自分のこと、あの人のこと、これからの人生。<br>あなたらしい一歩を見つけるお手伝いをします。</p>
-  </section>
-  <section class="grid" id="menus">
-    <article class="card"><span class="num">01 / LOVE</span><h2>恋愛タイプ診断</h2><p>恋をしたときのあなたの特徴や、惹かれやすい相手を読み解きます。</p><button onclick="openPanel(1)">鑑定する　›</button></article>
-    <article class="card"><span class="num">02 / MATCH</span><h2>ふたりの相性診断</h2><p>ふたりの個性や惹かれ合う理由、心地よい関係を築くヒントをお伝えします。</p><button onclick="openPanel(2)">相性をみる　›</button></article>
-    <article class="card"><span class="num">03 / MARRIAGE</span><h2>結婚時期・結婚後のあなた</h2><p>結婚に向かうタイミングや、結婚後に表れやすいあなたの姿を読み解きます。</p><button onclick="openPanel(3)">鑑定する　›</button></article>
-    <article class="card"><span class="num">04 / PERSONALITY</span><h2>あなたの基本性格</h2><p>生まれ持った個性、才能、仕事、恋愛、人との関わり方を総合的に見つめます。</p><button onclick="openPanel(4)">自分を知る　›</button></article>
-    <article class="card"><span class="num">05 / THREE YEARS</span><h2>2026〜2028年の運気</h2><p>3年間の流れをグラフと年ごとのテーマで確認できます。</p><button onclick="openPanel(5)">運気をみる　›</button></article>
-    <article class="card"><span class="num">06 / LIFE READING</span><h2>2026〜2028年の人生鑑定</h2><p>これからの3年間をどう過ごすか、人生のテーマと具体的なヒントをお届けします。</p><button onclick="openPanel(6)">人生を読み解く　›</button></article>
-  </section>
-  <p class="note">鑑定は、ご自身の選択や行動を応援するためのヒントとしてご活用ください。</p>
-  <section class="panel" id="panel">
-    <button class="back" onclick="closePanel()">← メニューに戻る</button>
-    <h2 id="panelTitle">鑑定</h2>
-    <p id="panelDesc">生年月日を入力してください。</p>
-    <div id="fields"></div>
-    <button class="submit" onclick="showNotice()">入力内容を確認する　›</button>
-    <div class="result" id="result">入力を受け付けました。現在はサイトのデザインと入力画面を準備している段階です。実際の鑑定結果を表示する計算機能は、次の制作段階で追加します。</div>
-  </section>
-</main>
-<footer>© michibiki</footer>
+:root{--blue:#a9cde9;--deep:#426987;--ink:#405b72;--muted:#71899d;--line:#dce9f3;--paper:rgba(255,255,255,.88);--pink:#f4dce2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:linear-gradient(180deg,#a9d1ef 0%,#d9eafa 42%,#f8fbfd 100%)}
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(ellipse at 15% 16%,rgba(255,255,255,.92) 0 5%,transparent 21%),radial-gradient(ellipse at 82% 25%,rgba(255,255,255,.8) 0 7%,transparent 23%),radial-gradient(ellipse at 40% 68%,rgba(255,255,255,.6) 0 6%,transparent 25%),linear-gradient(145deg,#a5cfee,#eaf4fb 68%,#c8e2f6)}
+.sky:before,.sky:after{content:"";position:absolute;width:75vw;height:18vh;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(34px)}.sky:before{top:13%;left:-20%}.sky:after{top:48%;right:-25%}
+header{max-width:920px;margin:auto;padding:34px 22px 12px;display:flex;justify-content:space-between;align-items:center}.brand{font-family:Georgia,serif;font-style:italic;font-size:clamp(38px,8vw,54px);letter-spacing:1px;color:#fff;text-shadow:0 2px 9px rgba(54,93,125,.25);line-height:1}.brand small{display:block;text-align:center;font:13px sans-serif;letter-spacing:7px;margin-top:8px}.tagline{font-size:12px;letter-spacing:2px;margin:10px 0 0;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.35)}
+main{max-width:920px;margin:0 auto;padding:0 18px 48px}.intro{text-align:center;margin:34px 0 28px}.intro .eyebrow{font:italic 13px Georgia,serif;letter-spacing:3px;color:#fff;text-shadow:0 1px 5px #7da4c4}.intro h1{font-size:clamp(23px,5vw,32px);font-weight:600;letter-spacing:2px;margin:8px 0 10px;color:#fff;text-shadow:0 2px 8px rgba(45,91,130,.35)}.intro p{font-size:14px;line-height:1.9;margin:0;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.35)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.card{background:rgba(255,255,255,.87);border:1px solid rgba(255,255,255,.95);border-radius:23px;padding:21px 20px 19px;box-shadow:0 10px 30px rgba(83,126,161,.11);display:flex;flex-direction:column;min-height:205px;backdrop-filter:blur(8px)}.num{font:12px Georgia,serif;color:#8eb5d6;letter-spacing:2px}.card h2{font-size:19px;line-height:1.5;margin:8px 0;color:#496b87;font-weight:600}.card p{font-size:13px;line-height:1.85;margin:0 0 17px;color:#71899d;flex:1}.card button,.submit{border:1px solid #fff;border-radius:30px;background:#fff;color:#6f9fc5;padding:12px 16px;font-size:14px;letter-spacing:1px;box-shadow:0 5px 14px rgba(80,130,170,.12);cursor:pointer}.card button:active,.submit:active{transform:translateY(1px)}.note{text-align:center;font-size:12px;line-height:1.8;color:#fff;text-shadow:0 1px 6px rgba(45,91,130,.35);margin:23px 8px}
+.panel{display:none;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.95);border-radius:24px;padding:23px 20px;margin-top:22px;box-shadow:0 12px 35px rgba(83,126,161,.12)}.panel.active{display:block}.back{border:0;background:none;color:#789bb8;padding:4px 0 14px;font-size:14px;cursor:pointer}.panel h2{margin:0 0 7px;color:#496b87;font-size:22px}.panel .desc{font-size:13px;line-height:1.8;color:#7b91a4;margin:0 0 17px}.field{margin:16px 0}.field label,.field-label{display:block;font-size:14px;margin:0 0 8px;color:#526f87;font-weight:600}.hint{font-size:11px;color:#91a4b4;font-weight:400;margin-left:5px}.choice-row{display:flex;gap:10px}.choice{flex:1;position:relative}.choice input{position:absolute;opacity:0;pointer-events:none}.choice span{display:block;text-align:center;padding:12px;border:1px solid #dce8f1;border-radius:13px;background:#fff;color:#68839a;cursor:pointer}.choice input:checked+span{background:#eaf4fb;border-color:#9fc5e4;color:#416d91;box-shadow:inset 0 0 0 1px #9fc5e4}input[type=date],input[type=text],select{width:100%;padding:13px 14px;border:1px solid #dce8f1;border-radius:13px;background:#fff;color:#526f87;font-size:16px;font-family:inherit;outline:none}input:focus,select:focus{border-color:#91bbdc;box-shadow:0 0 0 3px rgba(145,187,220,.16)}.submit{width:100%;margin-top:10px;background:#fff;border-color:#cfe0ed;color:#5d8db4;padding:14px}.result{display:none;background:#f3f8fc;border:1px solid #dce9f3;border-radius:15px;padding:15px;margin-top:16px;line-height:1.8;font-size:13px;color:#617b91}.result strong{color:#496b87}.back-to-top{display:block;text-align:center;color:#fff;text-decoration:none;font-size:12px;margin:24px auto 0;text-shadow:0 1px 6px rgba(45,91,130,.35)}footer{text-align:center;padding:18px 10px 28px;color:#fff;font:12px Georgia,serif;text-shadow:0 1px 6px rgba(45,91,130,.35)}
+.report-tools{display:none;margin-top:18px}.report-tools.active{display:block}.report-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.report-actions button{flex:1;min-width:145px;border:1px solid #cfe0ed;border-radius:24px;background:#fff;color:#5d8db4;padding:12px;font-size:14px;cursor:pointer}.report-sheet{background:#fffdfd;border:1px solid #f0e3e7;border-radius:18px;padding:clamp(18px,4vw,34px);color:#665c62;box-shadow:0 8px 24px rgba(120,100,110,.08)}.report-kicker{text-align:center;color:#c69aa8;letter-spacing:3px;font:italic 12px Georgia,serif}.report-sheet h3{text-align:center;color:#876b77;font-size:clamp(20px,3vw,26px);font-weight:500;margin:10px 0 4px}.report-meta{text-align:center;font-size:12px;color:#a18d95;margin-bottom:22px}.report-body{font-size:14px;line-height:1.9;white-space:pre-wrap;min-height:220px;padding:15px;border:1px dashed #ead9df;border-radius:12px;background:#fff}.report-body:focus{outline:2px solid #efdce2}.report-foot{text-align:center;color:#b79ba5;font:italic 12px Georgia,serif;margin-top:20px}.edit-note{font-size:12px;color:#8c9baa;line-height:1.7;margin:10px 0}.report-editor{width:100%;min-height:190px;padding:13px;border:1px solid #e7d9de;border-radius:12px;font:14px/1.8 inherit;color:#665c62;resize:vertical}@media print{body{background:#fff!important}.sky,header,.intro,.grid,.note,.back-to-top,footer,.panel>.back,.panel>h2,.panel>.desc,#entryForm,.result,.report-actions,.edit-note{display:none!important}main{max-width:none;padding:0}.panel{display:block!important;margin:0;padding:0;border:0;box-shadow:none;background:#fff}.report-tools{display:block!important;margin:0}.report-sheet{border:0;box-shadow:none;border-radius:0;min-height:270mm;padding:18mm 16mm}.report-body{border:0;padding:0;min-height:190mm}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.card{min-height:175px;padding:19px}.intro{margin-top:23px}.panel{padding:20px 16px}header{padding-top:27px}}
+</style></head>
+<body><div class="sky"></div>
+<header><div><div class="brand">michibiki<small>み ち び き</small></div><p class="tagline">あなたの心に、やさしい道しるべを</p></div></header>
+<main id="top">
+<section class="intro"><div class="eyebrow">YOUR PERSONAL GUIDE</div><h1>あなたを知る、6つの鑑定</h1><p>自分のこと、あの人のこと、これからの人生。<br>あなたらしい一歩を見つけるお手伝いをします。</p></section>
+<section class="grid" id="menus">
+<article class="card"><span class="num">01 / LOVE</span><h2>恋愛タイプ診断</h2><p>恋をしたときのあなたの特徴や、惹かれやすい相手を読み解きます。</p><button onclick="openPanel(1)">鑑定する　›</button></article>
+<article class="card"><span class="num">02 / MATCH</span><h2>ふたりの相性診断</h2><p>ふたりの個性や惹かれ合う理由、心地よい関係を築くヒントをお伝えします。</p><button onclick="openPanel(2)">相性をみる　›</button></article>
+<article class="card"><span class="num">03 / MARRIAGE</span><h2>結婚時期・結婚後のあなた</h2><p>あなた自身の結婚に向かうタイミングや、結婚後に表れやすい姿を読み解きます。</p><button onclick="openPanel(3)">鑑定する　›</button></article>
+<article class="card"><span class="num">04 / PERSONALITY</span><h2>あなたの基本性格</h2><p>生まれ持った個性や才能、仕事、恋愛、人との関わり方を総合的に見つめます。</p><button onclick="openPanel(4)">自分を知る　›</button></article>
+<article class="card"><span class="num">05 / THREE YEARS</span><h2>2026〜2028年の運気</h2><p>3年間の流れをグラフと年ごとのテーマで確認できます。</p><button onclick="openPanel(5)">運気をみる　›</button></article>
+<article class="card"><span class="num">06 / LIFE READING</span><h2>2026〜2028年の人生鑑定</h2><p>これからの3年間の人生のテーマや、あなたらしい過ごし方を読み解きます。</p><button onclick="openPanel(6)">人生を読み解く　›</button></article>
+</section>
+<p class="note">鑑定は、ご自身の選択や行動を応援するためのヒントとしてご活用ください。</p>
+<section class="panel" id="panel" aria-live="polite"><button class="back" onclick="closePanel()">← メニューに戻る</button><h2 id="panelTitle">鑑定</h2><p class="desc" id="panelDesc"></p><form id="entryForm" onsubmit="submitForm(event)"><div id="fields"></div><button class="submit" type="submit">入力内容を確認する　›</button></form><div class="result" id="result"></div><section class="report-tools" id="reportTools"><p class="edit-note">鑑定書の文章は、下の欄で自由に編集できます。内容を確認してからPDFまたは画像に書き出してください。</p><label class="field-label" for="reportText">鑑定書に載せる文章</label><textarea class="report-editor" id="reportText" placeholder="ここに鑑定内容を入力してください。"></textarea><div class="report-actions"><button type="button" onclick="updateReport()">プレビューを更新</button><button type="button" onclick="window.print()">PDFで保存・印刷</button><button type="button" onclick="downloadReportImage()">画像（PNG）で保存</button></div><div class="report-sheet" id="reportSheet"><div class="report-kicker">YOUR PERSONAL GUIDE</div><h3 id="reportHeading">鑑定書</h3><div class="report-meta" id="reportMeta"></div><div class="report-body" id="reportBody"></div><div class="report-foot">michibiki 〜みちびき〜</div></div></section></section>
+<a class="back-to-top" href="#top">ページの上へ ↑</a></main><footer>michibiki　〜みちびき〜</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-const titles={1:"恋愛タイプ診断",2:"ふたりの相性診断",3:"結婚時期・結婚後のあなた",4:"あなたの基本性格",5:"2026〜2028年の運気",6:"2026〜2028年の人生鑑定"};
-const desc={1:"あなたの恋愛傾向を読み解きます。",2:"おふたりの生年月日を入力してください。",3:"結婚に向かうタイミングと結婚後のあなたを読み解きます。",4:"あなたの個性や才能を総合的に読み解きます。",5:"2026年・2027年・2028年の運気を見ていきます。",6:"これから3年間の人生のテーマを読み解きます。"};
-function openPanel(n){
- document.getElementById("panelTitle").textContent=titles[n];
- document.getElementById("panelDesc").textContent=desc[n];
- const fields=document.getElementById("fields");
- fields.innerHTML='<label>お名前（任意）</label><input type="text" placeholder="お名前">';
- fields.innerHTML+='<label>生年月日</label><input type="date">';
- if(n===2) fields.innerHTML+='<label>お相手のお名前（任意）</label><input type="text" placeholder="お相手のお名前"><label>お相手の生年月日</label><input type="date">';
- document.getElementById("result").style.display="none";
- document.getElementById("panel").classList.add("active");
- document.getElementById("panel").scrollIntoView({behavior:"smooth"});
-}
-function closePanel(){document.getElementById("panel").classList.remove("active");document.getElementById("menus").scrollIntoView({behavior:"smooth"});}
-function showNotice(){document.getElementById("result").style.display="block";}
-</script>
-</body>
-</html>
+const titles={1:'恋愛タイプ診断',2:'ふたりの相性診断',3:'結婚時期・結婚後のあなた',4:'あなたの基本性格',5:'2026〜2028年の運気',6:'2026〜2028年の人生鑑定'};
+const desc={1:'あなたの恋愛傾向を読み解きます。',2:'おふたりの情報を入力してください。',3:'あなた自身の結婚に向かうタイミングと、結婚後のあなたを読み解きます。',4:'あなたの個性や才能を総合的に読み解きます。',5:'2026年・2027年・2028年の運気を見ていきます。',6:'これから3年間の人生のテーマを読み解きます。'};
+const prefectures='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
+let activeMenu=0;
+function genderField(id,label){return `<div class="field"><span class="field-label">${label}</span><div class="choice-row"><label class="choice"><input type="radio" name="${id}Gender" value="女性" required><span>女性</span></label><label class="choice"><input type="radio" name="${id}Gender" value="男性" required><span>男性</span></label></div></div>`}
+function personFields(id,label,withBirthplace){let s=`<div class="field"><label for="${id}Name">${label}のお名前<span class="hint">任意</span></label><input id="${id}Name" name="${id}Name" type="text" placeholder="お名前"></div>`;s+=genderField(id,label+'の性別');s+=`<div class="field"><label for="${id}Birth">${label}の生年月日</label><input id="${id}Birth" name="${id}Birth" type="date" required></div>`;if(withBirthplace){s+=`<div class="field"><label for="${id}Pref">出身地（都道府県）</label><select id="${id}Pref" name="${id}Pref" required><option value="">都道府県を選択してください</option>${prefectures.map(p=>`<option>${p}</option>`).join('')}</select></div>`}return s}
+function openPanel(n){activeMenu=n;document.getElementById('panelTitle').textContent=titles[n];document.getElementById('panelDesc').textContent=desc[n];let f=personFields('self','あなた',n===4||n===6);if(n===2)f+=`<div class="field" style="border-top:1px solid #e4edf4;padding-top:14px;margin-top:20px"><strong style="color:#597892;font-size:14px">お相手の情報</strong></div>`+personFields('partner','お相手',false);document.getElementById('fields').innerHTML=f;document.getElementById('result').style.display='none';document.getElementById('panel').classList.add('active');document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});}
+function closePanel(){document.getElementById('panel').classList.remove('active');document.getElementById('menus').scrollIntoView({behavior:'smooth',block:'start'});}
+function submitForm(e){e.preventDefault();const form=new FormData(e.target);const name=form.get('selfName')||'あなた';const birth=form.get('selfBirth');const gender=form.get('selfGender');let meta=`${gender} ／ ${birth}`;if(form.get('selfPref'))meta+=` ／ ${form.get('selfPref')}`;if(activeMenu===2){meta+=`　｜　お相手：${form.get('partnerGender')} ／ ${form.get('partnerBirth')}`;}document.getElementById('reportHeading').textContent=titles[activeMenu];document.getElementById('reportMeta').textContent=meta;document.getElementById('reportText').value=`${name}さんへ\n\n【鑑定内容】\n\nこちらに鑑定結果を入力してください。\n\n【大切にしてほしいこと】\n\nあなたらしい毎日を過ごすためのヒントを、ここに記入してください。`;updateReport();document.getElementById('reportTools').classList.add('active');const r=document.getElementById('result');r.textContent='入力内容を確認しました。下の鑑定書プレビューで文章を編集し、PDFまたは画像として保存できます。';r.style.display='block';document.getElementById('reportTools').scrollIntoView({behavior:'smooth',block:'start'});}
+function updateReport(){document.getElementById('reportBody').textContent=document.getElementById('reportText').value;}
+async function downloadReportImage(){updateReport();const sheet=document.getElementById('reportSheet');if(!window.html2canvas){alert('画像出力ライブラリを読み込めませんでした。通信環境を確認して、もう一度お試しください。');return;}try{const canvas=await html2canvas(sheet,{scale:2,backgroundColor:'#fffdfd',useCORS:true});const link=document.createElement('a');link.download='michibiki_鑑定書.png';link.href=canvas.toDataURL('image/png');link.click();}catch(err){alert('画像を書き出せませんでした。PDF保存をお試しください。');}}
+</script></body></html>
