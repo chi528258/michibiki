@@ -1,62 +1,121 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>michibiki｜恋愛タイプ診断</title>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>michibiki｜基本性格鑑定書</title>
 <style>
-:root{--pink:#f6e8eb;--cream:#fffaf3;--ink:#514b4a;--blue:#eaf3f8;--line:#eadcda}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f8f1ef,#edf5f8);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.7}
-main{max-width:850px;margin:auto;padding:22px 15px 60px}.hero,.panel,.result{background:#fffdfb;border:1px solid var(--line);border-radius:20px;padding:22px;margin:14px 0;box-shadow:0 5px 20px #78615b0d}
-.hero{text-align:center;background:linear-gradient(135deg,#fff8f5,#eff7fa)}h1{font-size:28px;letter-spacing:.08em;margin:5px}h2{font-size:19px;margin:0 0 14px}p{margin:6px 0}.sub{color:#8a8583;font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{display:block;font-size:14px;font-weight:600}input,select,textarea{width:100%;margin-top:5px;padding:12px;border:1px solid #dfd4d1;border-radius:10px;background:white;color:var(--ink);font-size:16px}textarea{min-height:85px;resize:vertical}
-button{border:0;border-radius:999px;padding:13px 22px;font-size:16px;background:#91b2c5;color:white;font-weight:700;cursor:pointer}button.secondary{background:#d9b9bf;color:#514b4a}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.result{display:none}.result h3{font-size:17px;color:#9a7078;margin:18px 0 4px}.pill{display:inline-block;background:var(--pink);padding:4px 10px;border-radius:99px;font-size:13px;margin:3px}
-.admin{background:#fff8f7}.note{font-size:12px;color:#8b7776}.result p{white-space:pre-wrap}
-@media(max-width:560px){main{padding:12px 10px 40px}.hero,.panel,.result{padding:17px;border-radius:16px}.grid{grid-template-columns:1fr}h1{font-size:24px}.actions button{width:100%}}
-@media print{body{background:white}.no-print,.admin{display:none!important}.result{display:block!important;box-shadow:none;border:0}.hero{box-shadow:none}}
-</style></head><body><main>
-<section class="hero"><div class="sub">あなたの恋愛傾向を読み解く</div><h1>michibiki</h1><h2>恋愛タイプ診断</h2><p>自分らしい恋愛の形と、心が惹かれる相手を見つけましょう。</p></section>
-<section class="panel no-print"><h2>① 基本情報</h2><div class="grid">
-<label>お名前（任意）<input id="name" placeholder="お名前"></label>
-<label>性別<select id="gender"><option value="">選択してください</option><option>女性</option><option>男性</option><option>回答しない</option></select></label>
-<label>生年月日<input id="birth" type="date" required></label>
-<label>出生時間<select id="timeMode"><option value="unknown">不明</option><option value="known">わかる</option></select></label>
-<label id="timeWrap" style="display:none">出生時間<input id="time" type="time"></label>
-<label>出生都道府県<select id="place"><option value="">選択してください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></label>
-</div><p class="note">月星座は出生時間・出生地を使った正確な天文暦計算が必要です。この試作版では誤判定を避けるため、内部確認欄に入力した結果を使用します。</p></section>
-<section class="panel no-print admin"><h2>② Nao専用・内部鑑定データ</h2><p class="note">ここに参考サイト等で確認した結果を入力します。お客様用鑑定書には占術名・内部メモは掲載されません。</p><div class="grid">
-<label>算命学・十大主星<input id="star" placeholder="例：龍高星"></label>
-<label>月星座<input id="moon" placeholder="例：蟹座"></label>
-<label>宿曜<input id="shukuyo" placeholder="例：〇〇宿"></label>
-<label>四柱推命・恋愛メモ<input id="four" placeholder="内部メモ"></label>
-</div><label style="margin-top:12px">内部メモ<textarea id="memo" placeholder="鑑定時に気づいたことなど"></textarea></label>
-<p class="note">参考：<a href="https://apollon-yamasaki.jp/marriage" target="_blank">算命学</a> ／ <a href="https://kosei-do.co.jp/fortune/uranai.php" target="_blank">宿曜</a> ／ <a href="https://moon-cycle.net/moon_sign.html" target="_blank">月星座・太陽星座</a></p>
-</section>
-<div class="actions no-print"><button id="go">鑑定結果を表示</button></div>
-<section class="result" id="result"><div class="sub">michibiki｜恋愛鑑定書</div><h2 id="heading">恋愛タイプ鑑定</h2><div><span class="pill" id="numPill"></span><span class="pill" id="sunPill"></span></div>
-<h3>恋愛での性格</h3><p id="love"></p><h3>好きなタイプ</h3><p id="type"></p><h3>求める行動</h3><p id="want"></p>
-<div class="actions no-print"><button onclick="window.print()">PDFとして保存・印刷</button><button class="secondary" id="copy">鑑定文をコピー</button></div></section>
+:root{--pink:#d99aaa;--rose:#b96f83;--cream:#fffaf5;--ink:#51434a;--sage:#9dbab0;--gold:#c5ad78}
+*{box-sizing:border-box}body{margin:0;background:#f7f2ef;color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.75}
+header{padding:30px 18px;text-align:center;background:linear-gradient(135deg,#fff8f4,#f6e6e8)}
+header .brand{letter-spacing:.18em;color:var(--rose);font-size:13px}h1{font-family:serif;font-weight:500;margin:8px 0 0;font-size:clamp(25px,5vw,36px)}
+main{max-width:980px;margin:26px auto;padding:0 16px 50px;display:grid;grid-template-columns:minmax(260px,330px) 1fr;gap:20px}
+.panel,.report{background:#fff;border:1px solid #eee2df;border-radius:18px;box-shadow:0 8px 24px #6f4c5410}
+.panel{padding:20px;height:max-content;position:sticky;top:16px}.panel h2{font-size:17px;margin:0 0 14px;color:var(--rose)}
+label{display:block;font-size:13px;margin:13px 0 5px}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #e7d8d7;border-radius:10px;background:#fffdfb;color:var(--ink);font:inherit}
+button{border:0;border-radius:999px;padding:12px 18px;background:var(--rose);color:white;font-weight:600;cursor:pointer;margin-top:16px;width:100%}
+button.secondary{background:#eee6e3;color:#68565c;margin-top:9px}
+.hint{font-size:12px;color:#897b7d}
+.report{padding:clamp(18px,4vw,38px);min-height:500px}
+.report-head{text-align:center;border-bottom:1px solid #eadfda;padding-bottom:18px;margin-bottom:20px}
+.report-head .eyebrow{color:var(--sage);letter-spacing:.2em;font-size:12px}
+.report-head h2{font-family:serif;font-size:28px;font-weight:500;margin:5px}
+.meta{font-size:13px;color:#8b7a7e}
+h3{font-family:serif;font-weight:500;color:var(--rose);font-size:20px;margin:24px 0 8px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.pill{background:#f8edef;border:1px solid #efdde1;border-radius:999px;padding:5px 12px;font-size:13px}
+.feature{background:#fff9f5;border-left:3px solid var(--sage);padding:13px 15px;border-radius:0 10px 10px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#fbf8f5;border:1px solid #eee5df;border-radius:12px;padding:12px}
+.tile b{display:block;color:#9a7180;font-size:13px}
+textarea{min-height:100px;resize:vertical}
+footer{text-align:center;font-size:11px;color:#9a8b8d;margin-top:26px}
+@media(max-width:760px){main{grid-template-columns:1fr}.panel{position:static}.grid{grid-template-columns:1fr}}
+@media print{body{background:white}.panel,header{display:none}main{display:block;margin:0;max-width:none;padding:0}.report{border:0;box-shadow:none;border-radius:0}.report{padding:18mm 16mm}.report section{break-inside:avoid}button{display:none}}
+</style>
+</head>
+<body>
+<header><div class="brand">michibiki 〜みちびき〜</div><h1>基本性格 鑑定書作成</h1></header>
+<main>
+<aside class="panel">
+<h2>お客様情報</h2>
+<label for="name">お名前</label><input id="name" placeholder="例：山田 花子">
+<label for="birth">生年月日</label><input id="birth" type="date" value="1997-05-18">
+<label for="place">出生地（都道府県）</label><select id="place"><option value="">都道府県を選択</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select>
+<p class="hint">出生時刻は入力不要です。月星座は今回の試作版では未搭載です。</p>
+<button id="make">鑑定結果を作成</button>
+<button class="secondary" id="print">PDFとして保存・印刷</button>
+<button class="secondary" id="copy">鑑定文をコピー</button>
+</aside>
+<article class="report" id="report">
+<div class="report-head"><div class="eyebrow">PERSONALITY REPORT</div><h2>基本性格 鑑定書</h2><div class="meta" id="person">お名前・生年月日を入力してください</div></div>
+<div class="pills" id="badges"></div>
+<section><h3>あなたの基本データ</h3><div class="grid" id="data"></div></section>
+<section><h3>あなたの本質</h3><div class="feature" id="essence">「鑑定結果を作成」を押すと、基本性格が表示されます。</div></section>
+<section><h3>性格の特徴</h3><div id="personality"></div></section>
+<section><h3>日干から見るあなたらしさ</h3><div id="stemText"></div></section>
+<section><h3>地支から見る行動傾向</h3><div id="branchText"></div></section>
+<section><h3>総合的な人物像</h3><div id="summary"></div></section>
+<section><h3>鑑定メモ（編集できます）</h3><textarea id="memo" placeholder="追加の鑑定内容やNaoさんから伝えたいことを入力"></textarea></section>
+<footer>michibiki 〜みちびき〜　｜　自分らしい道を見つけるための鑑定書</footer>
+</article>
 </main>
 <script>
-const $=id=>document.getElementById(id);
-$("timeMode").addEventListener("change",()=>{$("timeWrap").style.display=$("timeMode").value==="known"?"block":"none"});
-function numerology(s){let n=s.replaceAll("-","").split("").reduce((a,b)=>a+Number(b),0);let original=n;while(n>9&&![11,22,33,44].includes(n)){n=String(n).split("").reduce((a,b)=>a+Number(b),0)}return {n,original};}
-function sunSign(m,d){let x=m*100+d;return x>=321&&x<=419?"牡羊座":x>=420&&x<=520?"牡牛座":x>=521&&x<=621?"双子座":x>=622&&x<=722?"蟹座":x>=723&&x<=822?"獅子座":x>=823&&x<=922?"乙女座":x>=923&&x<=1023?"天秤座":x>=1024&&x<=1122?"蠍座":x>=1123&&x<=1221?"射手座":x>=1222||x<=119?"山羊座":x<=218?"水瓶座":"魚座";}
-const nums={
-1:["好きになると自分から動き、まっすぐに気持ちを伝える傾向。自分らしさを大切にしながら恋を育てます。","自立していて、自分の考えや目標を持つ人。お互いを尊重できる相手に惹かれます。","気持ちを曖昧にせず、言葉と行動で誠実に向き合ってくれることを求めます。"],
-2:["相手の気持ちを細やかに感じ取り、安心できる関係を大切にする傾向。","優しく、気持ちを受け止めてくれる穏やかな人。","小さな気遣いやこまめな愛情表現で、安心させてくれることを求めます。"],
-3:["一緒に楽しめることが恋の原動力。明るく自然体でいられる恋愛を好みます。","会話が弾み、好奇心があり、楽しい時間を共有できる人。","笑い合う時間や新しい体験を一緒に楽しむことを求めます。"],
-4:["信頼を積み重ねる慎重派。軽い関係より、将来を見据えた恋を好みます。","誠実で約束を守り、生活感覚が合う安定した人。","言葉だけでなく、約束を守る行動や継続的な思いやりを求めます。"],
-5:["自由さと刺激を大切にし、恋愛にも新鮮さや変化を求める傾向。","好奇心旺盛で柔軟。束縛せず、お互いの世界を尊重できる人。","干渉しすぎず、変化や挑戦を一緒に楽しんでくれることを求めます。"],
-6:["好きな人を大切にし、愛情を注ぐことで関係を深める傾向。","思いやりがあり、愛情を素直に表現してくれる人。","感謝や愛情を言葉にし、二人の時間を丁寧に作ることを求めます。"],
-7:["相手をよく観察し、心から信頼できるまでゆっくり距離を縮める傾向。","落ち着きがあり、考え方や価値観を深く共有できる人。","一人の時間も尊重しながら、誠実に対話してくれることを求めます。"],
-8:["情熱的で、好きな人との関係を前向きに進めようとする傾向。","芯が強く、目標に向かって努力できる頼もしい人。","気持ちを行動で示し、対等な立場で支え合うことを求めます。"],
-9:["相手の個性を受け止め、深い理解や精神的なつながりを大切にする傾向。","包容力があり、優しさと自分らしさを持つ人。","決めつけずに話を聞き、気持ちを理解しようとする姿勢を求めます。"],
-11:["直感的に惹かれることがあり、心のつながりや特別な感覚を大切にする傾向。","感性が豊かで、繊細な気持ちを理解してくれる人。","表面的な言葉だけでなく、気持ちに寄り添う丁寧な愛情表現を求めます。"],
-22:["恋愛にも理想と現実の両方を求め、将来を一緒に築ける相手を大切にする傾向。","志を持ち、信頼できる行動で未来を考えられる人。","口約束ではなく、二人の未来に向けて一緒に行動することを求めます。"],
-33:["愛情深く、相手を包み込むような優しさを持つ傾向。与えることと受け取ることのバランスが鍵。","個性を認め合い、優しさを自然に返してくれる人。","一方通行にならず、互いに思いやりを返し合うことを求めます。"],
-44:["責任感が強く、安心できる関係を着実に築こうとする傾向。","誠実で現実的な判断ができ、長期的な信頼を育める人。","言葉と行動に一貫性があり、日々の安心を積み重ねることを求めます。"]
+const stems = [
+["甲","きのえ","陽・木","大木・幹のある木","向上心が強く、まっすぐに成長しようと努力するタイプ。素直で正直な一方、曲がったことが苦手で、融通がききにくい面もあります。"],
+["乙","きのと","陰・木","草花・葉・木陰","柔軟性があり、周囲との調和を大切にするタイプ。穏やかで親しみやすい一方、粘り強さを持ち、内面にはしっかりした芯があります。"],
+["丙","ひのえ","陽・火","太陽・大きな炎","明るく朗らかで、人を照らすような存在。気持ちの切り替えが早く、社交的ですが、勢いで進みすぎることもあります。"],
+["丁","ひのと","陰・火","月・星・灯火","繊細な感性と内に秘めた情熱を持つタイプ。慎重に見えて集中力があり、一度決めたことには深く向き合います。"],
+["戊","つちのえ","陽・土","大きな山・堤防","信念が強く、どっしりと構える安定型。忍耐力と責任感があり頼られますが、自分から動き出すまでに時間がかかることも。"],
+["己","つちのと","陰・土","大地・田園・湿地","愛情深く、面倒見のよい育てるタイプ。順応性があり努力家ですが、納得できないことには慎重で、身近な人に深く尽くします。"],
+["庚","かのえ","陽・金","刀・斧・鉱石","決断力と行動力があり、筋を通すことを大切にするタイプ。率直で頼もしい一方、白黒をはっきりさせたくなる面もあります。"],
+["辛","かのと","陰・金","宝石・貴金属","美意識や繊細さを持ち、独自の感性で周囲を惹きつけるタイプ。こだわりが強く、細かなことに敏感な一面もあります。"],
+["壬","みずのえ","陽・水","大河・海・湖","柔軟でスケールが大きく、環境に合わせて動けるタイプ。情に厚く行動力がありますが、気持ちや関心が移り変わりやすい面も。"],
+["癸","みずのと","陰・水","雨・露・霧・雲","思いやりがあり、感受性豊かなタイプ。人を優先できる優しさがありますが、悩みを内側にため込みやすいこともあります。"]
+];
+const branches = [
+["子","ね","陽・水","凍った水・雪","冷静で慎重。物事をよく考え、着実に積み上げることを大切にします。"],
+["丑","うし","陰・土","雪をかぶった大地","忍耐強く、粘り強く努力を続けるタイプ。結果を急がず、時間をかけて形にします。"],
+["寅","とら","陽・木","芽吹く若木","向上心と行動力があり、目標に向かって進む力を持ちます。自分の考えを大切にする傾向も。"],
+["卯","う","陰・木","春の草花","人当たりが柔らかく、公平で協調的。思いやりがあり、周囲との関係を大切にします。"],
+["辰","たつ","陽・土","新緑の丘・湿地","信念と自尊心があり、目標に向けて粘り強く進みます。負けず嫌いで、切り替えが早い面も。"],
+["巳","み","陰・火","燃えさかる炎","存在感があり、内側に情熱を秘めるタイプ。集中力が高く、好きなことに深く取り組みます。"],
+["午","うま","陽・火","太陽・炎","明るく大胆で、好奇心旺盛。人の輪の中で力を発揮しますが、気持ちが先走ることもあります。"],
+["未","ひつじ","陰・土","乾いた大地・砂漠","心が広く柔軟で、平和を好みます。人に合わせられる一方、遠慮して譲りすぎることも。"],
+["申","さる","陽・金","金鉱・岩場から湧く水","頭の回転が速く、工夫や改善が得意。計画性があり、状況を見て臨機応変に動けます。"],
+["酉","とり","陰・金","宝石・実り","信念があり、独自の感性や発想力を持ちます。自分の道を大切にし、細部にもこだわります。"],
+["戌","いぬ","陽・土","赤く染まった大地","誠実で義理人情を大切にします。責任感が強い一方、頑固になったり譲れなくなったりすることも。"],
+["亥","い","陰・水","山あいを流れる水","勢いと行動力があり、柔軟性も備えます。繊細で傷つきやすい面を持ちながら、表現力があります。"]
+];
+const nums = {
+1:"行動力があり、エネルギッシュでリーダー気質。自分で決めて前に進む力があります。せっかちになりやすいときは、周囲の歩幅も意識するとよさそうです。",
+2:"共感力が高く、人を支えることが得意な平和主義者。相手の気持ちを大切にする分、自分の希望も言葉にすることが大切です。",
+3:"好奇心旺盛で明るく、周囲を元気にするムードメーカー。楽しさや表現することが、あなたらしさにつながります。",
+4:"努力家で計画性があり、安定と秩序を重んじます。積み重ねる力が魅力ですが、予定外の変化にも余白を持てるとさらに楽になります。",
+5:"自由を愛し、冒険心と変化を好むアクティブな人。新しい経験から力を得ます。ひとつずつ形にする意識も役立ちます。",
+6:"面倒見がよく、調和と愛情を大切にする家庭的な人。人を思いやる力が魅力ですが、自分自身をいたわる時間も大切です。",
+7:"知的好奇心が高く、論理的でマイペース。納得するまで考える探究心があります。完璧を求めすぎず、途中の自分も認めてあげましょう。",
+8:"野心家で実行力があり、大きな目標を成し遂げる力を持ちます。目標に向かう強さと、周囲と協力する柔軟さが鍵です。",
+9:"精神性が高く、誰に対しても優しく包み込む理想主義者。広い視野を持つ一方、他人のことを抱え込みすぎないようにしましょう。",
+11:"直感力が鋭く、独特の感性を持つメッセンジャー。ひらめきを大切にしながら、現実的な一歩に落とし込むと力を発揮します。",
+22:"大きな理想を具体的な形にしていくスケール感と実行力を持ちます。壮大な目標も、小さな段階に分けることで進めやすくなります。",
+33:"枠にとらわれない価値観と独自の感性を持つタイプ。自由な発想が魅力ですが、自分のペースや境界線を大切にしましょう。"
 };
-$("go").addEventListener("click",()=>{let b=$("birth").value;if(!b){alert("生年月日を入力してください");return;}let [y,m,d]=b.split("-").map(Number),nu=numerology(b),sun=sunSign(m,d),v=nums[nu.n]||nums[9];$("heading").textContent=($("name").value||"あなた")+"の恋愛タイプ鑑定";$("numPill").textContent="運命数 "+nu.n;$("sunPill").textContent="太陽星座 "+sun;
-$("love").textContent=v[0]+($("star").value? " 内部確認した星の傾向（"+$("star").value+"）も踏まえて、鑑定時に調整してください。":"");
-$("type").textContent=v[1];$("want").textContent=v[2];$("result").style.display="block";$("result").scrollIntoView({behavior:"smooth",block:"start"});});
-$("copy").addEventListener("click",async()=>{let t=["恋愛での性格",$("love").textContent,"好きなタイプ",$("type").textContent,"求める行動",$("want").textContent].join("\n\n");try{await navigator.clipboard.writeText(t);alert("鑑定文をコピーしました");}catch(e){alert("コピーできませんでした。PDF保存をご利用ください。");}});
-</script></body></html>
+function numerology(s){let n=s.replaceAll("-","").split("").reduce((a,b)=>a+Number(b),0);while(n>9&&!([11,22,33].includes(n)))n=String(n).split("").reduce((a,b)=>a+Number(b),0);return n}
+function sunSign(s){let [y,m,d]=s.split("-").map(Number);let x=m*100+d;return x>=321&&x<=419?"牡羊座":x>=420&&x<=520?"牡牛座":x>=521&&x<=621?"双子座":x>=622&&x<=722?"蟹座":x>=723&&x<=822?"獅子座":x>=823&&x<=922?"乙女座":x>=923&&x<=1023?"天秤座":x>=1024&&x<=1122?"蠍座":x>=1123&&x<=1221?"射手座":(x>=1222||x<=119)?"山羊座":x<=218?"水瓶座":"魚座"}
+function dayPillar(s){let [y,m,d]=s.split("-").map(Number);let a=Math.floor((14-m)/12), yy=y+4800-a, mm=m+12*a-3;let j=d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045;let idx=(j+49)%60;return {stem:stems[idx%10],branch:branches[idx%12],idx}}
+function make(){let s=document.getElementById("birth").value;if(!s){alert("生年月日を入力してください");return}let name=document.getElementById("name").value.trim()||"お客様";let num=numerology(s),sun=sunSign(s),p=dayPillar(s);let dt=new Date(s+"T12:00:00");let date=`${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日`;document.getElementById("person").textContent=`${name} 様　｜　${date}生まれ　｜　${document.getElementById("place").value||"出生地未入力"}`;
+document.getElementById("badges").innerHTML=`<span class="pill">数秘術 ${num}</span><span class="pill">${sun}</span><span class="pill">日干 ${p.stem[0]}</span><span class="pill">日柱 ${p.stem[0]}${p.branch[0]}</span>`;
+document.getElementById("data").innerHTML=`<div class="tile"><b>数秘術</b>${num}</div><div class="tile"><b>太陽星座</b>${sun}</div><div class="tile"><b>日柱の天干</b>${p.stem[0]}（${p.stem[1]}）</div><div class="tile"><b>日柱の地支</b>${p.branch[0]}（${p.branch[1]}）</div><div class="tile"><b>日柱</b>${p.stem[0]}${p.branch[0]}</div><div class="tile"><b>出生地</b>${document.getElementById("place").value||"未入力"}</div>`;
+document.getElementById("essence").textContent=`あなたの数秘術は${num}。${nums[num]} 日干の${p.stem[0]}は「${p.stem[3]}」を象徴し、${p.stem[4]} 地支の${p.branch[0]}は「${p.branch[3]}」を象徴し、${p.branch[4]}`;
+document.getElementById("personality").innerHTML=`<p>${nums[num]}</p><p>${p.stem[4]}</p><p>${p.branch[4]}</p>`;
+document.getElementById("stemText").innerHTML=`<div class="feature"><b>${p.stem[0]}（${p.stem[1]}）／${p.stem[2]}</b><br>象徴：${p.stem[3]}<br>${p.stem[4]}</div>`;
+document.getElementById("branchText").innerHTML=`<div class="feature"><b>${p.branch[0]}（${p.branch[1]}）／${p.branch[2]}</b><br>象徴：${p.branch[3]}<br>${p.branch[4]}</div>`;
+document.getElementById("summary").textContent=`数秘術${num}の持ち味に、${p.stem[0]}の性質と${p.branch[0]}の行動傾向が重なります。自分の強みを活かしながら、状況に応じて柔軟に選択することが、あなたらしさを伸ばすポイントです。`;
+}
+document.getElementById("make").addEventListener("click",make);
+document.getElementById("print").addEventListener("click",()=>window.print());
+document.getElementById("copy").addEventListener("click",()=>{let t=document.getElementById("report").innerText;navigator.clipboard?.writeText(t).then(()=>alert("鑑定書の文章をコピーしました。")).catch(()=>alert("コピーできない場合は、文章を選択してコピーしてください。"))});
+make();
+</script>
+</body></html>
