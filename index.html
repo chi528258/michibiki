@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="ja">
+html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +20,8 @@ h3{font-family:serif;font-weight:500;color:var(--rose);font-size:20px;margin:24p
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.pill{background:#f8edef;border:1px solid #efdde1;border-radius:999px;padding:5px 12px;font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{background:#fbf8f5;border:1px solid #eee5df;border-radius:12px;padding:12px}.tile b{display:block;color:#9a7180;font-size:13px}
 .source-card{background:#fffdf9;border:1px solid #eee5df;border-left:4px solid var(--sage);border-radius:0 12px 12px 0;padding:16px;margin:12px 0;white-space:normal}
-.source-card h4{margin:0 0 8px;color:#72505d;font-size:17px}.source-card p{margin:7px 0}.tag{font-size:12px;color:#8b777d}
+.source-card h4{margin:0 0 8px;color:#72505d;font-size:17px}
+.astrology-card{background:linear-gradient(135deg,#fffaf7,#f8edf0);border:1px solid #efdde1;border-radius:14px;padding:16px;margin:12px 0}.astrology-card h4{margin:0 0 6px;color:#9a6175;font-size:18px}.astrology-card p{margin:7px 0}.source-card p{margin:7px 0}.tag{font-size:12px;color:#8b777d}
 footer{text-align:center;font-size:11px;color:#9a8b8d;margin-top:26px}
 @media(max-width:760px){main{grid-template-columns:1fr}.panel{position:static}.grid{grid-template-columns:1fr}}
 @media print{body{background:white}.panel,header{display:none}main{display:block;margin:0;max-width:none;padding:0}.report{border:0;box-shadow:none;border-radius:0;padding:16mm 14mm}.report section{break-inside:avoid}.source-card{break-inside:avoid}}
@@ -43,6 +43,9 @@ footer{text-align:center;font-size:11px;color:#9a8b8d;margin-top:26px}
 <div class="report-head"><div class="eyebrow">PERSONALITY REPORT</div><h2>基本性格 鑑定書</h2><div class="meta" id="person">お名前・生年月日を入力してください</div></div>
 <div class="pills" id="badges"></div>
 <section><h3>あなたの基本データ</h3><div class="grid" id="data"></div></section>
+<section><h3>太陽星座｜表にあらわれるあなた</h3><div id="sunText"></div></section>
+<section><h3>月星座｜心の奥にあるあなた</h3><div id="moonText"></div></section>
+<section><h3>太陽星座と月星座の組み合わせ</h3><div id="comboText"></div></section>
 <section><h3>数秘術</h3><div id="numText"></div></section>
 <section><h3>日干（十干）がもつ性質</h3><div id="stemText"></div></section>
 <section><h3>地支（十二支）がもつ性質</h3><div id="branchText"></div></section>
@@ -75,15 +78,26 @@ const branches = [
 ["戌","いぬ","陽・土","赤く染まった大地や燥土","風水での方位は「西北西」、季節は「晩秋」で土性でも「赤く染まった大地や燥土」を表します。秋冬にかけて天候が変わりやすいように、不安定でとらえどころのない性質もあります。誠実で義理人情を重んじますが、常に敵か味方かで相手を見てしまう傾向も。人の話を聞かない頑固さがありつつ、我慢強さや持久力は随一です。"],
 ["亥","い","陰・水","山あいを流れる川の水や揺れる水面","風水での方位は「北北西」、季節は「初冬」であることから水性でも「山あいを流れる川の水や揺れる水面」を表します。川なので勢いに乗っているときは非常に活発で進歩を上げます。その一方で、純粋で傷つきやすい繊細な面もあります。生きづらさを感じながらももち前の柔軟性と表現力で障害を乗り越えていけるたくましさもあるでしょう。"]
 ];
+const zodiac=["牡羊座","牡牛座","双子座","蟹座","獅子座","乙女座","天秤座","蠍座","射手座","山羊座","水瓶座","魚座"];
+const zodiacReadings={
+"牡羊座":"自分の気持ちに正直で、思い立ったら行動に移せる情熱家。新しいことを始める力があり、まっすぐな姿勢が魅力です。","牡牛座":"自分の感覚を大切にし、安心できるものをじっくり育てるタイプ。穏やかさと粘り強さがあり、好きなものへの愛情も深めです。","双子座":"好奇心が旺盛で、情報や人との会話から刺激を受けるタイプ。柔軟な発想と軽やかなコミュニケーションが魅力です。","蟹座":"身近な人を大切にし、共感力と面倒見のよさを持つタイプ。安心できる居場所や心のつながりを大事にします。","獅子座":"自分らしさを表現することが得意で、明るさと華やかさを持つタイプ。誇りと温かさがあり、周囲を元気づけます。","乙女座":"細やかな観察力があり、物事を整えたり役に立つことに喜びを感じるタイプ。誠実で、丁寧に取り組む姿勢が魅力です。","天秤座":"人との調和やバランス感覚を大切にするタイプ。相手の立場を考えながら、美しさや心地よさを見つけるのが得意です。","蠍座":"物事や人と深く向き合い、一度大切だと思ったものを簡単には手放さないタイプ。洞察力と集中力を持っています。","射手座":"自由を愛し、未知の世界や新しい経験に心が動くタイプ。前向きな探究心があり、自分の可能性を広げていきます。","山羊座":"目標に向けて着実に努力を重ねる現実派。責任感が強く、時間をかけて信頼や成果を築いていくタイプです。","水瓶座":"独自の視点や自由な発想を大切にするタイプ。周囲に流されず、自分らしい距離感で人と関わることができます。","魚座":"想像力と共感力が豊かで、人の気持ちを自然に感じ取るタイプ。優しさや柔らかな感性を持ち、心のつながりを大切にします。"};
+function jdUTC(date){return date.getTime()/86400000+2440587.5}
+function norm360(x){return ((x%360)+360)%360}
+function sunLongitude(date){const T=(jdUTC(date)-2451545)/36525;const L0=norm360(280.46646+36000.76983*T+0.0003032*T*T);const M=norm360(357.52911+35999.05029*T-0.0001537*T*T);const Mr=M*Math.PI/180;const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(Mr)+(0.019993-0.000101*T)*Math.sin(2*Mr)+0.000289*Math.sin(3*Mr);return norm360(L0+C)}
+function moonLongitude(date){const T=(jdUTC(date)-2451545)/36525;const rad=Math.PI/180;const L=norm360(218.3164477+481267.88123421*T-0.0015786*T*T+T*T*T/538841-T*T*T*T/65194000);const D=norm360(297.8501921+445267.1114034*T-0.0018819*T*T+T*T*T/545868-T*T*T*T/113065000);const M=norm360(357.5291092+35999.0502909*T-0.0001536*T*T+T*T*T/24490000);const Mp=norm360(134.9633964+477198.8675055*T+0.0087414*T*T+T*T*T/69699-T*T*T*T/14712000);const F=norm360(93.2720950+483202.0175233*T-0.0036539*T*T-T*T*T/3526000+T*T*T*T/863310000);const terms=[[0,0,1,0,6288774],[2,0,-1,0,1274027],[2,0,0,0,658314],[0,0,2,0,213618],[0,1,0,0,-185116],[0,0,0,2,-114332],[2,0,-2,0,58793],[2,-1,-1,0,57066],[2,0,1,0,53322],[2,-1,0,0,45758],[0,1,-1,0,-40923],[1,0,0,0,-34720],[0,1,1,0,-30383],[2,0,0,-2,15327],[0,0,1,2,-12528],[0,0,1,-2,10980],[4,0,-1,0,10675],[0,0,3,0,10034],[4,0,-2,0,8548],[2,1,-1,0,-7888],[2,1,0,0,-6766],[1,0,-1,0,-5163],[1,1,0,0,4987],[2,-1,1,0,4036],[2,0,2,0,3994],[4,0,0,0,3861],[2,0,-3,0,3665],[0,1,-2,0,-2689],[2,0,-1,2,-2602],[2,-1,-2,0,2390]];let sum=0;for(const [d,m,mp,f,c] of terms){const e=Math.pow(1-0.002516*T-0.0000074*T*T,Math.abs(m));sum+=c*e*Math.sin((d*D+m*M+mp*Mp+f*F)*rad)}return norm360(L+sum/1000000)}
+function signsForDay(ymd,fn){const [y,m,d]=ymd.split('-').map(Number);const out=[];for(let h=0;h<24;h+=3){const t=new Date(Date.UTC(y,m-1,d,h-9));const sign=zodiac[Math.floor(fn(t)/30)%12];if(!out.includes(sign))out.push(sign)}return out}
 const nums={1:"行動力があり、エネルギッシュでリーダー気質（せっかちな一面も）",2:"共感力が高く、人をサポートする平和主義者",3:"好奇心旺盛で明るく、まわりを元気にするムードメーカー",4:"努力家で計画性があり、安定と秩序を重んじるロジカリスト",5:"自由を愛し、冒険心と変化を好むアクティブな人",6:"面倒見がよく、調和と愛情を大切にする家庭的な人",7:"知的好奇心が高く、論理的でマイペースな完璧主義者",8:"野心家で実行力があり、大きな目標を成し遂げるリーダー",9:"精神性が高く、誰に対しても優しく包み込む理想主義者",11:"直感力が非常に鋭く、独特の感性を持つメッセンジャー",22:"圧倒的なスケールで理想を形にするカリスマ性を持つ",33:"枠に囚われない宇宙的な価値観を持つアーティスト・変わり者"};
 function numerology(s){let n=s.replaceAll("-","").split("").reduce((a,b)=>a+Number(b),0);while(n>9&&![11,22,33].includes(n))n=String(n).split("").reduce((a,b)=>a+Number(b),0);return n}
 function sunSign(s){let [,m,d]=s.split("-").map(Number),x=m*100+d;return x>=321&&x<=419?"牡羊座":x>=420&&x<=520?"牡牛座":x>=521&&x<=621?"双子座":x>=622&&x<=722?"蟹座":x>=723&&x<=822?"獅子座":x>=823&&x<=922?"乙女座":x>=923&&x<=1023?"天秤座":x>=1024&&x<=1122?"蠍座":x>=1123&&x<=1221?"射手座":(x>=1222||x<=119)?"山羊座":x<=218?"水瓶座":"魚座"}
 function dayPillar(s){let [y,m,d]=s.split("-").map(Number),a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3,j=d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045,idx=(j+49)%60;return{stem:stems[idx%10],branch:branches[idx%12]}}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function make(){let s=document.getElementById("birth").value;if(!s){alert("生年月日を入力してください");return}let name=document.getElementById("name").value.trim()||"お客様",num=numerology(s),sun=sunSign(s),p=dayPillar(s),dt=new Date(s+"T12:00:00"),date=`${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日`,place=document.getElementById("place").value;
+function make(){let s=document.getElementById("birth").value;if(!s){alert("生年月日を入力してください");return}let name=document.getElementById("name").value.trim()||"お客様",num=numerology(s),sunList=signsForDay(s,sunLongitude),moonList=signsForDay(s,moonLongitude),sun=sunList[0],moon=moonList[0],p=dayPillar(s),dt=new Date(s+"T12:00:00"),date=`${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日`,place=document.getElementById("place").value;
 document.getElementById("person").textContent=`${name} 様 ｜ ${date}生まれ ｜ ${place||"出生地未入力"}`;
-document.getElementById("badges").innerHTML=`<span class="pill">数秘術 ${num}</span><span class="pill">${sun}</span><span class="pill">日柱 ${p.stem[0]}${p.branch[0]}</span>`;
-document.getElementById("data").innerHTML=`<div class="tile"><b>数秘術</b>${num}</div><div class="tile"><b>太陽星座</b>${sun}</div><div class="tile"><b>日柱の天干</b>${p.stem[0]}（${p.stem[1]}）</div><div class="tile"><b>日柱の地支</b>${p.branch[0]}（${p.branch[1]}）</div><div class="tile"><b>日柱</b>${p.stem[0]}${p.branch[0]}</div><div class="tile"><b>出生地</b>${place||"未入力"}</div>`;
+document.getElementById("badges").innerHTML=`<span class="pill">数秘術 ${num}</span><span class="pill">太陽星座 ${sunList.join("・")}</span><span class="pill">月星座 ${moonList.join("・")}</span><span class="pill">日柱 ${p.stem[0]}${p.branch[0]}</span>`;
+document.getElementById("data").innerHTML=`<div class="tile"><b>数秘術</b>${num}</div><div class="tile"><b>太陽星座</b>${sunList.join("・")}</div><div class="tile"><b>月星座</b>${moonList.join("・")}</div><div class="tile"><b>日柱の天干</b>${p.stem[0]}（${p.stem[1]}）</div><div class="tile"><b>日柱の地支</b>${p.branch[0]}（${p.branch[1]}）</div><div class="tile"><b>日柱</b>${p.stem[0]}${p.branch[0]}</div><div class="tile"><b>出生地</b>${place||"未入力"}</div>`;
+document.getElementById("sunText").innerHTML=sunList.map(z=>`<div class="astrology-card"><h4>${z}</h4><p>${zodiacReadings[z]}</p>${sunList.length>1?'<p class="hint">この日は星座が切り替わる可能性があるため、出生時刻によって結果が異なります。</p>':''}</div>`).join("");
+document.getElementById("moonText").innerHTML=moonList.map(z=>`<div class="astrology-card"><h4>${z}</h4><p>${zodiacReadings[z]}</p>${moonList.length>1?'<p class="hint">この日は月星座が切り替わる可能性があります。出生時刻が不明なため、候補を併記しています。</p>':''}</div>`).join("");
+document.getElementById("comboText").innerHTML=`<div class="astrology-card"><h4>太陽 ${sunList.join("・")} × 月 ${moonList.join("・")}</h4><p>太陽星座は外に見せやすい性格や人生で大切にする方向性、月星座は心の奥の反応や安心できるものを表すとされます。${sunList[0]}の${zodiacReadings[sunList[0]]} 月星座の${moonList[0]}は、${zodiacReadings[moonList[0]]} 2つの性質をあわせて、自分らしさを見つめてみましょう。</p></div>`;
 document.getElementById("numText").innerHTML=`<div class="source-card"><h4>数秘術 ${num}</h4><p>${esc(nums[num])}</p></div>`;
 document.getElementById("stemText").innerHTML=`<div class="source-card"><h4>${p.stem[0]}（${p.stem[1]}）</h4><div class="tag">陰陽五行：${p.stem[2]} ｜ 象意：${p.stem[3]}</div><p>${esc(p.stem[4])}</p></div>`;
 document.getElementById("branchText").innerHTML=`<div class="source-card"><h4>${p.branch[0]}（${p.branch[1]}）</h4><div class="tag">陰陽五行：${p.branch[2]} ｜ 象意：${p.branch[3]}</div><p>${esc(p.branch[4])}</p></div>`;
